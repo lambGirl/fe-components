@@ -1,4 +1,1 @@
-// export { default as Loading } from './Loading';
-export default {
-    
-}
+export { default as Loading } from './Loading';
