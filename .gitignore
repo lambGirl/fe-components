@@ -1,0 +1,15 @@
+node_modules
+.module-cache
+dist/
+es/
+lib/
+package-lock.json
+yarn-error.log
+_site
+.DS_STORE
+*.log*
+*.sublime-project
+*.sublime-workspace
+.idea
+*.iml
+.vscode

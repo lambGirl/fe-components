@@ -1,0 +1,37 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  /**
+      插件可以提供处理器。
+      处理器可以从另一种文件中提取JavaScript代码，然后让ESLint lint JavaScript代码。
+      或者处理器可以出于某种目的在预处理中转换JavaScript代码。
+  */
+  "plugins": ["@typescript-eslint", "react"],
+  "parserOptions": {
+    "ecmaVersion": 2018, // 指定 JavaScript 相关的选项， 指定用哪个 ECMAScript 的版本，默认是 3 和 5。
+    "sourceType": "module", // ECMAScript模块中，则设置为'script‘ 或者 ‘module’
+    "ecmaFeatures": { // 指定需要使用语言，globalReturn： 允许全局范围内的return语句； impliedStrict启用全局严格模式（如果ecmaVersion为5或更高); JSX: 启动jsx
+      "jsx": true
+    }
+  },
+  "rules": {
+    "semi": "error",  // 语句以分号结尾
+    "no-console": "warn", // disallow the use of console
+    "@typescript-eslint/no-var-requires": "off",     
+    "@typescript-eslint/indent": ["off", 2],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/interface-name-prefix": ["error", "always"]
+  },
+  // 添加共享设置， 浏览器公用全局配置
+  "settings": { 
+    "react": {
+      "version": "detect"
+    }
+  }
+}
