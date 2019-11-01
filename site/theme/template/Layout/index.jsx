@@ -1,13 +1,37 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { IntlProvider } from 'react-intl';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import Header from './header';
+// import feComponents from 'feComponents';
 import enLocale from '../../../en-US';
 import cnLocale from '../../../zh-CN';
 import * as utils from '../utils';
 import '../../static/style';
+
+if (typeof window !== 'undefined') {
+  // Expose to iframe
+  window.react = React;
+  window['react-dom'] = ReactDOM;
+  // eslint-disable-next-line global-require
+  // window.feComponents = feComponents;
+
+  // Error log statistic
+  window.addEventListener('error', function onError(e) {
+    // Ignore ResizeObserver error
+    if (e.message === 'ResizeObserver loop limit exceeded') {
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
+  });
+
+  if (process.env.NODE_ENV === 'production') {
+    LogRocket.init('kpuw4z/ant-design');
+    setupLogRocketReact(LogRocket);
+  }
+}
 
 export default class Layout extends React.Component {
     constructor(props) {
@@ -25,7 +49,7 @@ export default class Layout extends React.Component {
       const { appLocale } = this.state;
       const title =
         appLocale.locale === 'zh-CN'
-        ? '内部组件库'
+        ? '客如云内部组件库'
         : 'Ant Design - A UI Design Language and React UI library';
       const description =
         appLocale.locale === 'zh-CN'

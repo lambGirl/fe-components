@@ -288,7 +288,6 @@ class MainContent extends Component {
     const mainContainerClass = classNames('main-container', {
       'main-container-component': !!demos,
     });
-   // console.log('menuItems :', menuItems, openKeys);
     const menuChild = (
       <Menu
         inlineIndent={40}

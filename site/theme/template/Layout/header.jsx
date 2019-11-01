@@ -93,7 +93,7 @@ class Header extends React.Component {
             clearfix: true,
         });
         const isZhCN = locale === 'zh-CN';
-        const searchPlaceholder = locale === 'zh-CN' ? '在组件库中搜索' : 'Search in lamia';
+        const searchPlaceholder = locale === 'zh-CN' ? '在客如云组件库中搜索' : 'Search in keruyun';
         return (
             <header id="header" className={headerClassName}>
                 <Row>
@@ -107,7 +107,7 @@ class Header extends React.Component {
                                 alt="Ant Design"
                                 src="https://gw.alipayobjects.com/zos/rmsportal/DkKNubTaaVsKURhcVGkh.svg"
                             /> */}
-                            组件库
+                            客如云组件库
                             <Santa /> 
                         </Link>
                     </Col>

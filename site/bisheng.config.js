@@ -1,4 +1,5 @@
 const path = require('path');
+const antd =  require('antd');
 /**
  * bisheng start读取
  * 
@@ -72,11 +73,13 @@ module.exports = {
     config.resolve.alias = {
       // antd: path.join(process.cwd(), 'index'),
       site: path.join(process.cwd(), 'site'),
+      'feComponents':path.join(process.cwd(), 'components')
     };
 
     // eslint-disable-next-line
     config.externals = {
       'react-router-dom': 'ReactRouterDOM',
+      'Antd' : antd,
     };
     config.module.rules.push({
       test: /\.mjs$/,

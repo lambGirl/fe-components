@@ -102,15 +102,15 @@ class Demo extends React.Component {
       highlightedStyle, expand, utils, intl: { locale },
     } = this.props;
     const { copied, copyTooltipVisible } = this.state;
-    // if (!this.liveDemo) {
-    //   this.liveDemo = meta.iframe ? (
-    //     <BrowserFrame>
-    //       <iframe src={src} height={meta.iframe} title="demo" />
-    //     </BrowserFrame>
-    //   ) : (
-    //     preview(React, ReactDOM)
-    //   );
-    // }
+    if (!this.liveDemo) {
+      this.liveDemo = meta.iframe ? (
+        <BrowserFrame>
+          <iframe src={src} height={meta.iframe} title="demo" />
+        </BrowserFrame>
+      ) : (
+        preview(React, ReactDOM)
+      );
+    }
     const codeExpand = this.state.codeExpand || expand;
     const codeBoxClass = classNames('code-box', {
       expand: codeExpand,
@@ -125,86 +125,12 @@ class Demo extends React.Component {
       'highlight-wrapper-expand': codeExpand,
     });
 
-    const prefillStyle = `@import 'antd/dist/antd.css';\n\n${style || ''}`.replace(
-      new RegExp(`#${meta.id}\\s*`, 'g'),
-      '',
-    );
     const html = `<div id="container" style="padding: 24px"></div>
 <script>
   var mountNode = document.getElementById('container');
 </script>`;
 
     const sourceCode = this.getSourceCode();
-
-    const codepenPrefillConfig = {
-      title: `${localizedTitle} - Ant Design Demo`,
-      html,
-      js: sourceCode
-        .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'antd';/, 'const { $1 } = antd;')
-        .replace("import moment from 'moment';", '')
-        .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'react-router';/, 'const { $1 } = ReactRouter;')
-        .replace(
-          /import\s+\{\s+(.*)\s+\}\s+from\s+'react-router-dom';/,
-          'const { $1 } = ReactRouterDOM;',
-        )
-        .replace(/([a-zA-Z]*)\s+as\s+([a-zA-Z]*)/, '$1:$2'),
-      css: prefillStyle,
-      editors: '001',
-      css_external: 'https://unpkg.com/antd/dist/antd.css',
-      js_external: [
-        'react@16.x/umd/react.development.js',
-        'react-dom@16.x/umd/react-dom.development.js',
-        'moment/min/moment-with-locales.js',
-        'antd/dist/antd-with-locales.js',
-        'react-router-dom/umd/react-router-dom.min.js',
-        'react-router@3.x/umd/ReactRouter.min.js',
-      ]
-        .map(url => `https://unpkg.com/${url}`)
-        .join(';'),
-      js_pre_processor: 'typescript',
-    };
-    const riddlePrefillConfig = {
-      title: `${localizedTitle} - Ant Design Demo`,
-      js: sourceCode,
-      css: prefillStyle,
-    };
-    const dependencies = sourceCode.split('\n').reduce(
-      (acc, line) => {
-        const matches = line.match(/import .+? from '(.+)';$/);
-        if (matches && matches[1] && !line.includes('antd')) {
-          const [dep] = matches[1].split('/');
-          if (dep) {
-            acc[dep] = 'latest';
-          }
-        }
-        return acc;
-      },
-      { react: 'latest', 'react-dom': 'latest', antd: 'latest' },
-    );
-    const codesanboxPrefillConfig = {
-      files: {
-        'package.json': {
-          content: {
-            dependencies,
-          },
-        },
-        'index.css': {
-          content: (style || '').replace(new RegExp(`#${meta.id}\\s*`, 'g'), ''),
-        },
-        'index.js': {
-          content: `
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './index.css';
-${sourceCode.replace('mountNode', "document.getElementById('container')")}
-          `,
-        },
-        'index.html': {
-          content: html,
-        },
-      },
-    };
     return (
       <section className={codeBoxClass} id={meta.id}>
         <section className="code-box-demo">
@@ -227,7 +153,7 @@ ${sourceCode.replace('mountNode', "document.getElementById('container')")}
           </div>
           <div className="code-box-description">{introChildren}</div>
           <div className="code-box-actions">
-            <form
+            {/* <form
               action="//riddle.alibaba-inc.com/riddles/define"
               method="POST"
               target="_blank"
@@ -241,8 +167,8 @@ ${sourceCode.replace('mountNode', "document.getElementById('container')")}
                   className="code-box-riddle"
                 />
               </Tooltip>
-            </form>
-            <form
+            </form> */}
+            {/* <form
               action="https://codepen.io/pen/define"
               method="POST"
               target="_blank"
@@ -256,8 +182,8 @@ ${sourceCode.replace('mountNode', "document.getElementById('container')")}
                   className="code-box-codepen"
                 />
               </Tooltip>
-            </form>
-            <form
+            </form> */}
+            {/* <form
               action="https://codesandbox.io/api/v1/sandboxes/define"
               method="POST"
               target="_blank"
@@ -275,7 +201,7 @@ ${sourceCode.replace('mountNode', "document.getElementById('container')")}
                   className="code-box-codesandbox"
                 />
               </Tooltip>
-            </form>
+            </form> */}
             <CopyToClipboard text={sourceCode} onCopy={() => this.handleCodeCopied(meta.id)}>
               <Tooltip
                 visible={copyTooltipVisible}

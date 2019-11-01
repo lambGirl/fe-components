@@ -66,9 +66,11 @@ class ComponentDoc extends React.Component {
     const isSingleCol = meta.cols === 1;
     const leftChildren = [];
     const rightChildren = [];
+    console.log('demoValues :', demoValues);
     const showedDemo = demoValues.some(demo => demo.meta.only)
       ? demoValues.filter(demo => demo.meta.only)
       : demoValues.filter(demo => demo.preview);
+      
     showedDemo
       .sort((a, b) => a.meta.order - b.meta.order)
       .forEach((demoData, index) => {

@@ -55,10 +55,10 @@ const Home = (props) => {
   return <>
      <style dangerouslySetInnerHTML={{ __html: getStyle() }} /> {/* eslint-disable-line */}
      <Helmet encodeSpecialCharacters={false}>
-         <title>{`组件库首页`}</title> 
+         <title>{`客如云组件库首页`}</title> 
     </Helmet> 
     <div className='home-content'>
-      组件库
+      客如云组件库
     </div> 
   </>
 }
