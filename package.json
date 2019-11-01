@@ -1,5 +1,5 @@
 {
-  "name": "fe-components",
+  "name": "lamia-modules",
   "version": "0.0.2",
   "description": "Project based on react.",
   "main": "lib/index.js",
