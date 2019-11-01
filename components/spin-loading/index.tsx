@@ -1,11 +1,12 @@
 import React from 'react';
 import { Spin } from 'antd';
-import { LoadingInterFaces } from './_interfaces';
 
-const SpinLoading = ({status = false, children}: LoadingInterFaces)=> {
+type SpinLoadingProps={
+  status: boolean,
+}
+const SpinLoading:React.FC<SpinLoadingProps>= ({status, children})=> {
   return status ? <Spin>
     {children}
-  </Spin> :{children}
+  </Spin> : children as React.ReactElement<any>;
 }
-
 export default SpinLoading;
